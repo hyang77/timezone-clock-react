@@ -15,13 +15,16 @@ class App extends React.Component {
       return { timezone: [...state.timezone, newTimezone] };
     });
   }
+
   render() {
     return (
       <div className="App">
         <h1 className="title">Timezone Clock</h1>
-        <SelectTimezone updateTimezoneArray={this.updateTimezoneArray} />
+        <SelectTimezone
+          timezone={this.state.timezone}
+          updateTimezoneArray={this.updateTimezoneArray}
+        />
         <div className="card-container">
-          {" "}
           {this.state.timezone.map((item) => (
             <Card key={item} timezone={item} />
           ))}
