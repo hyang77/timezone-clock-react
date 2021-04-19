@@ -3,6 +3,7 @@ import React from "react";
 class SelectTimezone extends React.Component {
   constructor(props) {
     super(props);
+    this.selectedTimezone = "-12";
     this.state = { disableAddButton: false };
     this.handleTimezoneChange = this.handleTimezoneChange.bind(this);
     this.handleAddTimezone = this.handleAddTimezone.bind(this);
@@ -37,9 +38,7 @@ class SelectTimezone extends React.Component {
           <option value="-3">UTC-3</option>
           <option value="-2">UTC-2</option>
           <option value="-1">UTC-1</option>
-          <option value="0">
-            UTC
-          </option>
+          <option value="0">UTC</option>
           <option value="1">UTC+1</option>
           <option value="2">UTC+2</option>
           <option value="3">UTC+3</option>
