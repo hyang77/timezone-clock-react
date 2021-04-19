@@ -7,17 +7,22 @@ class Card extends React.Component {
     this.updateTime = this.updateTime.bind(this);
     this.state = { hours: "", minutes: "", seconds: "" };
   }
+  
   componentDidMount() {
+    // Add timer
     this.timer = setInterval(this.updateTime, 1000);
   }
 
   updateTime() {
+    // Get the current time
+    let now = new Date();
+    // Update hours based on the selected timezone
+    now.setUTCHours(now.getUTCHours() + parseInt(this.props.timezone));
     this.setState({
-      hours: new Date().getUTCHours(),
-      minutes: new Date().getUTCMinutes(),
-      seconds: new Date().getUTCSeconds(),
+      hours: now.getUTCHours(),
+      minutes: now.getUTCMinutes(),
+      seconds: now.getUTCSeconds(),
     });
-    console.log("hi");
   }
 
   componentWillUnmount() {
@@ -26,16 +31,16 @@ class Card extends React.Component {
 
   render() {
     const { hours, minutes, seconds } = this.state;
+    const { timezone } = this.props;
     return (
       <div className="time-card">
-        <p className="timezone">{this.props.timezone}</p>
+        <p className="timezone">
+          {timezone >= 0 ? `UTC+${timezone}` : `UTC${timezone}`}
+        </p>
         <p>
           {hours}:{minutes}:{seconds}
         </p>
-        <button
-          type="button"
-          onClick={() => this.props.removeClock(this.props.timezone)}
-        >
+        <button type="button" onClick={() => this.props.removeClock(timezone)}>
           Delete
         </button>
       </div>

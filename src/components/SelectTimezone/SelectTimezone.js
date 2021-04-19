@@ -37,7 +37,7 @@ class SelectTimezone extends React.Component {
           <option value="-3">UTC-3</option>
           <option value="-2">UTC-2</option>
           <option value="-1">UTC-1</option>
-          <option selected value="0">
+          <option value="0">
             UTC
           </option>
           <option value="1">UTC+1</option>
