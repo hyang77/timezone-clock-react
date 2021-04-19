@@ -6,7 +6,9 @@ function Card(props) {
     <div className="time-card">
       <p className="timezone">{props.timezone}</p>
       <p>16:00:25</p>
-      <button type="button">Delete</button>
+      <button type="button" onClick={() => props.removeClock(props.timezone)}>
+        Delete
+      </button>
     </div>
   );
 }

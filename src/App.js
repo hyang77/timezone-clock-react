@@ -6,14 +6,23 @@ import SelectTimezone from "./components/SelectTimezone/SelectTimezone";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { timezone: [] };
+    this.state = { timezones: [] };
     this.updateTimezoneArray = this.updateTimezoneArray.bind(this);
+    this.removeClock = this.removeClock.bind(this);
   }
 
   updateTimezoneArray(newTimezone) {
     this.setState((state) => {
-      return { timezone: [...state.timezone, newTimezone] };
+      return { timezones: [...state.timezones, newTimezone] };
     });
+  }
+
+  removeClock(item) {
+    // Copy array
+    const copiedTimezones = [...this.state.timezones];
+    // Remove item from array
+    copiedTimezones.splice(copiedTimezones.indexOf(item), 1);
+    this.setState({timezones: copiedTimezones})
   }
 
   render() {
@@ -21,12 +30,12 @@ class App extends React.Component {
       <div className="App">
         <h1 className="title">Timezone Clock</h1>
         <SelectTimezone
-          timezone={this.state.timezone}
+          timezone={this.state.timezones}
           updateTimezoneArray={this.updateTimezoneArray}
         />
         <div className="card-container">
-          {this.state.timezone.map((item) => (
-            <Card key={item} timezone={item} />
+          {this.state.timezones.map((item) => (
+            <Card key={item} timezone={item} removeClock={this.removeClock} />
           ))}
         </div>
       </div>
