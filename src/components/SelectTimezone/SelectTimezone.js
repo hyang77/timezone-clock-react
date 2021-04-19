@@ -13,13 +13,15 @@ class SelectTimezone extends React.Component {
     if (this.props.timezone.includes(e.target.value)) {
       this.setState({ disableAddButton: true });
     } else {
-      this.selectedTimezone = e.target.value;
       this.setState({ disableAddButton: false });
     }
+    this.selectedTimezone = e.target.value;
   }
 
   handleAddTimezone() {
     this.props.updateTimezoneArray(this.selectedTimezone);
+    // Disable add button after adding selected timezone to aviod being added more than once
+    this.setState({ disableAddButton: true });
   }
 
   render() {
