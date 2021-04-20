@@ -6,9 +6,17 @@ import SelectTimezone from "./components/SelectTimezone/SelectTimezone";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { timezones: [] };
+    // Get clocks saved in local storage
+    const local = localStorage.getItem('timezones')
+    this.state = { timezones: JSON.parse(local) };
     this.updateTimezoneArray = this.updateTimezoneArray.bind(this);
     this.removeClock = this.removeClock.bind(this);
+  }
+
+  componentDidUpdate(prevState) {
+    if (this.state.timezones !== prevState.timezones) {
+      localStorage.setItem("timezones", JSON.stringify(this.state.timezones));
+    }
   }
 
   updateTimezoneArray(newTimezone) {
@@ -22,7 +30,7 @@ class App extends React.Component {
     const copiedTimezones = [...this.state.timezones];
     // Remove item from array
     copiedTimezones.splice(copiedTimezones.indexOf(item), 1);
-    this.setState({timezones: copiedTimezones})
+    this.setState({ timezones: copiedTimezones });
   }
 
   render() {
