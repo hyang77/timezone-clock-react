@@ -1,0 +1,20 @@
+#add-button {
+  cursor: pointer;
+  margin-left: 8px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 700;
+  background-color: #3da9fc;
+  color: #fffffe;
+  border: 2px solid #3da9fc;
+}
+
+#add-button:disabled {
+  background-color: #90b4ce;
+  border: 2px solid #90b4ce;
+}
+
+select {
+  padding: 5px 10px;
+}
