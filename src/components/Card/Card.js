@@ -7,9 +7,9 @@ class Card extends React.Component {
     this.updateTime = this.updateTime.bind(this);
     this.state = { hours: "", minutes: "", seconds: "" };
   }
-  
+
   componentDidMount() {
-    // Add timer
+    this.timer = this.updateTime(); // Add timer immediately
     this.timer = setInterval(this.updateTime, 1000);
   }
 
@@ -40,7 +40,11 @@ class Card extends React.Component {
         <p>
           {hours}:{minutes}:{seconds}
         </p>
-        <button type="button" onClick={() => this.props.removeClock(timezone)}>
+        <button
+          id="delete-button"
+          type="button"
+          onClick={() => this.props.removeClock(timezone)}
+        >
           Delete
         </button>
       </div>
