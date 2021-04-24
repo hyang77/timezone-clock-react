@@ -7,16 +7,26 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     // Get clocks saved in local storage
-    const local = localStorage.getItem('timezones')
-    this.state = { timezones: JSON.parse(local) };
+    const local = localStorage.getItem("timezones");
+    this.state = { timezones: JSON.parse(local), timer: new Date() };
     this.updateTimezoneArray = this.updateTimezoneArray.bind(this);
     this.removeClock = this.removeClock.bind(this);
+    this.updateTime = this.updateTime.bind(this);
+  }
+
+  componentDidMount() {
+    this.interval = this.updateTime(); // Add interval immediately
+    this.interval = setInterval(this.updateTime, 1000);
   }
 
   componentDidUpdate(prevState) {
     if (this.state.timezones !== prevState.timezones) {
       localStorage.setItem("timezones", JSON.stringify(this.state.timezones));
     }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   updateTimezoneArray(newTimezone) {
@@ -33,6 +43,12 @@ class App extends React.Component {
     this.setState({ timezones: copiedTimezones });
   }
 
+  updateTime() {
+    // Get the current time
+    const now = new Date();
+    this.setState({ timer: now });
+  }
+
   render() {
     return (
       <div className="App">
@@ -43,7 +59,12 @@ class App extends React.Component {
         />
         <div className="card-container">
           {this.state.timezones.map((item) => (
-            <Card key={item} timezone={item} removeClock={this.removeClock} />
+            <Card
+              key={item}
+              timer={this.state.timer}
+              timezone={item}
+              removeClock={this.removeClock}
+            />
           ))}
         </div>
       </div>
