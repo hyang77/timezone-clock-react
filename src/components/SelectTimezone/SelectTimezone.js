@@ -1,15 +1,16 @@
 import React from "react";
+import "./SelectTimezone.css";
 
 class SelectTimezone extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {selectedTimezone:　"placeholder"};
+    this.state = { selectedTimezone: "placeholder" };
     this.handleTimezoneChange = this.handleTimezoneChange.bind(this);
     this.handleAddTimezone = this.handleAddTimezone.bind(this);
   }
 
   handleTimezoneChange(e) {
-    this.setState({selectedTimezone: e.target.value});
+    this.setState({ selectedTimezone: e.target.value });
   }
 
   handleAddTimezone() {
@@ -17,6 +18,7 @@ class SelectTimezone extends React.Component {
   }
 
   render() {
+
     return (
       <div>
         <select name="timezone" onChange={this.handleTimezoneChange}>
@@ -47,12 +49,22 @@ class SelectTimezone extends React.Component {
           <option value="11">UTC+11</option>
           <option value="12">UTC+12</option>
         </select>
-        {this.props.timezone.includes(this.state.selectedTimezone) || this.state.selectedTimezone === "placeholder" ? (
-          <button type="button" disabled onClick={this.handleAddTimezone}>
+        {this.props.timezone.includes(this.state.selectedTimezone) ||
+        this.state.selectedTimezone === "placeholder" ? (
+          <button
+            id="add-button"
+            type="button"
+            disabled
+            onClick={this.handleAddTimezone}
+          >
             Add
           </button>
         ) : (
-          <button type="button" onClick={this.handleAddTimezone}>
+          <button
+            id="add-button"
+            type="button"
+            onClick={this.handleAddTimezone}
+          >
             Add
           </button>
         )}
