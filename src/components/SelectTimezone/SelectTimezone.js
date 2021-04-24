@@ -3,28 +3,17 @@ import React from "react";
 class SelectTimezone extends React.Component {
   constructor(props) {
     super(props);
-    this.selectedTimezone = "placeholder";
-    this.state = { disableAddButton: true };
+    this.state = {selectedTimezone:　"placeholder"};
     this.handleTimezoneChange = this.handleTimezoneChange.bind(this);
     this.handleAddTimezone = this.handleAddTimezone.bind(this);
   }
 
   handleTimezoneChange(e) {
-    if (
-      this.props.timezone.includes(e.target.value) ||
-      e.target.value === "placeholder"
-    ) {
-      this.setState({ disableAddButton: true });
-    } else {
-      this.setState({ disableAddButton: false });
-    }
-    this.selectedTimezone = e.target.value;
+    this.setState({selectedTimezone: e.target.value});
   }
 
   handleAddTimezone() {
-    this.props.updateTimezoneArray(this.selectedTimezone);
-    // Disable add button after adding selected timezone to aviod being added more than once
-    this.setState({ disableAddButton: true });
+    this.props.updateTimezoneArray(this.state.selectedTimezone);
   }
 
   render() {
@@ -58,7 +47,7 @@ class SelectTimezone extends React.Component {
           <option value="11">UTC+11</option>
           <option value="12">UTC+12</option>
         </select>
-        {this.state.disableAddButton ? (
+        {this.props.timezone.includes(this.state.selectedTimezone) || this.state.selectedTimezone === "placeholder" ? (
           <button type="button" disabled onClick={this.handleAddTimezone}>
             Add
           </button>
